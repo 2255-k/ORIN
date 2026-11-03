@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 12 12 15;
+  --bg-elevated: 20 20 24;
+  --bg-panel: 22 22 28;
+  --bg-hover: 30 30 38;
+  --border: 42 42 51;
+  --text: 244 244 247;
+  --muted: 154 154 168;
+  --accent: 124 92 255;
+  --accent-2: 99 102 241;
+  --danger: 240 113 120;
+  --online: 61 214 140;
+  --bubble-out: 91 63 214;
+  --bubble-in: 30 30 38;
+}
+
+:root[data-theme="light"] {
+  --bg: 244 244 248;
+  --bg-elevated: 255 255 255;
+  --bg-panel: 255 255 255;
+  --bg-hover: 240 240 246;
+  --border: 226 226 234;
+  --text: 17 17 24;
+  --muted: 96 96 112;
+  --accent: 109 70 255;
+  --accent-2: 79 70 229;
+  --danger: 220 70 80;
+  --online: 16 160 96;
+  --bubble-out: 109 70 255;
+  --bubble-in: 240 240 246;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--border)) transparent;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+  background: rgb(var(--bg));
+  color: rgb(var(--text));
+  -webkit-font-smoothing: antialiased;
+}
+
+input,
+textarea,
+button {
+  font-family: inherit;
+}
+
+.orin-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.orin-scroll::-webkit-scrollbar-thumb {
+  background: rgb(var(--border));
+  border-radius: 99px;
+}
+
+.bubble-in {
+  background: rgb(var(--bubble-in));
+}
+.bubble-out {
+  background: rgb(var(--bubble-out));
+  color: white;
+}
