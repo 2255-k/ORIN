@@ -1,0 +1,29 @@
+# Used by the DAST job only: spins up the full ORIN stack from the freshly built images.
+services:
+  mongo:
+    image: mongo:7
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  server:
+    image: ghcr.io/${IMAGE_OWNER}/orin-server:${IMAGE_TAG}
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: "5000"
+      MONGODB_URI: mongodb://mongo:27017/orin
+      JWT_SECRET: ci-only-secret-not-used-anywhere-else-0123456789abcdef
+      CLIENT_URL: http://localhost:8080
+      COOKIE_SECURE: "false"
+
+  client:
+    image: ghcr.io/${IMAGE_OWNER}/orin-client:${IMAGE_TAG}
+    depends_on:
+      - server
+    ports:
+      - "8080:8080"

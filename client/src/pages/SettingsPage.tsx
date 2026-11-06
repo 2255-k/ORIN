@@ -45,14 +45,14 @@ export function SettingsPage() {
     setUser(data.data.user);
   }
 
-  async function savePrefs() {
+  const savePrefs = async () => {
     const { data } = await api.patch("/settings", {
       privacy: user.privacy,
       notifications: user.notifications,
     });
     setUser(data.data.user);
     setMessage("Preferences saved");
-  }
+  };
 
   return (
     <section className="orin-scroll h-full flex-1 overflow-y-auto bg-[rgb(var(--bg))] p-6">
